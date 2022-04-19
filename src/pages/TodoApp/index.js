@@ -1,36 +1,33 @@
 import React from 'react'
-import { useDispatch, useSelector } from "react-redux";
-import { COUNTING } from '../../constants/reducerCase';
+import { useSelector } from 'react-redux';
+import CreateTodo from './CreateTodo';
 import DoneList from './DoneList';
 import NotDoneList from './NotDoneList';
+import Tab from './Tab';
 
 function TodoApp() {
-  const dispatch = useDispatch();
-  const [Tab, setTab] = React.useState('not-done-list')
-
-  const { count } = useSelector(state => state.counter);
+  const { tab, itemsNotDone } = useSelector(state => state.todoList);
 
   return (
-    <div className='mx-64 my-12 space-y-7'>
-      <h1 className="text-2xl font-semibold mb-24">To Do Application (Majoo Test Case)</h1>
-
-      <div className='grid grid-cols-2 p-1 bg-gray-100 rounded space-x-1'>
-        <button onClick={() => setTab('not-done-list')} className='col-span-1 bg-red-400 py-2 rounded'>
-          Not Done List
-        </button>
-        <button onClick={() => setTab('done-list')} className='col-span-1 bg-gray-400 py-2 rounded'>
-          Done List
-        </button>
+    <div className='my-6 lg:px-14 xl:px-24'>
+      <div className='mb-8 space-y-1'>
+        <h1 className="text-xl font-semibold">To Do List Application</h1>
+        <h1 className="text-base text-gray-500 font-normal">You have {itemsNotDone.length} to-do lists that you haven't done yet</h1>
       </div>
-
+      <div className='mb-6'>
+        <CreateTodo />
+      </div>
+      <div className='mb-1.5'>
+        <Tab />
+      </div>
       <div>
         {
-          Tab === "not-done-list"
+          tab === "not-done-list"
           &&
           <NotDoneList />
         }
         {
-          Tab === "done-list"
+          tab === "done-list"
           &&
           <DoneList />
         }

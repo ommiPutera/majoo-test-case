@@ -1,36 +1,44 @@
 import axios from 'axios'
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import List from '../../components/List'
+import { GET_DONE_TODO } from '../../constants/reducerCase';
 import LoadingIcon from '../../utils/LoadingIcon'
 
 function DoneList() {
-  const [data, setData] = React.useState(null)
-  const [loading, setLoading] = React.useState(false)
+  const dispatch = useDispatch();
+  const { itemsDone } = useSelector(state => state.todoList);
+  const [loading, setLoading] = React.useState(true)
 
-  const load = () => {
-    setLoading(true)
-
+  const load = React.useCallback(() => {
     axios
       .get('https://virtserver.swaggerhub.com/hanabyan/todo/1.0.0/to-do-list')
       .then((items) => {
         const data = items.data.filter((item) => item?.status === 1)
-        setData(data);
+        dispatch({ type: GET_DONE_TODO, data })
         setLoading(false)
       })
-  }
+  }, [dispatch])
 
   React.useEffect(() => {
-    load()
-  }, [])
+    if (itemsDone.length) {
+      setTimeout(() => {
+        setLoading(false)
+      }, 500)
+    }
+    if (!itemsDone.length) load()
+  }, [load, itemsDone])
 
   return (
     <React.Fragment>
       {
-        data && !loading
+        itemsDone && !loading
           ?
-          data.map((item) => (
+          itemsDone.sort((a, b) => b.date - a.date).reverse().map((item) => (
             <div key={item.id}>
               <List
+                id={item.id}
+                status={item.status}
                 title={item.title}
                 desc={item.description}
                 date={item.createdAt}
