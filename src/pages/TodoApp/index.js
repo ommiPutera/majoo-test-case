@@ -1,15 +1,30 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { COMPLETE_INFO_TODO } from '../../constants/reducerCase';
 import CreateTodo from './CreateTodo';
 import DoneList from './DoneList';
 import NotDoneList from './NotDoneList';
 import Tab from './Tab';
 
 function TodoApp() {
-  const { tab, itemsNotDone } = useSelector(state => state.todoList);
+  const dispatch = useDispatch();
+  const { tab, itemsNotDone, completeInfo } = useSelector(state => state.todoList);
+
+  const renderCompleteInfo = React.useCallback(() => {
+    if (completeInfo) {
+      return (
+        <div className='fixed bottom-6 right-6 animate__component px-4 py-2 text-sm font-semibold text-white rounded-lg bg-green-500 w-[220px]'>
+          Complete!
+        </div>
+      )
+    }
+    setTimeout(() => {
+      dispatch({ type: COMPLETE_INFO_TODO })
+    }, 2800)
+  }, [completeInfo, dispatch])
 
   return (
-    <div className='my-6 lg:px-14 xl:px-24'>
+    <div className='relative my-6 lg:px-14 xl:px-24'>
       <div className='mb-8 space-y-1'>
         <h1 className="text-xl font-semibold">To Do List Application</h1>
         <h1 className="text-base text-gray-500 font-normal">You have {itemsNotDone.length} to-do lists that you haven't done yet</h1>
@@ -20,7 +35,7 @@ function TodoApp() {
       <div className='mb-1.5'>
         <Tab />
       </div>
-      <div>
+      <div className='relative'>
         {
           tab === "not-done-list"
           &&
@@ -31,6 +46,7 @@ function TodoApp() {
           &&
           <DoneList />
         }
+        {renderCompleteInfo()}
       </div>
     </div>
   )

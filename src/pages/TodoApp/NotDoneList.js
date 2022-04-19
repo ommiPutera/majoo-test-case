@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import List from '../../components/List'
+import List from '../../components/list'
 import { GET_NOT_DONE_TODO } from '../../constants/reducerCase';
 import LoadingIcon from '../../utils/LoadingIcon'
 
@@ -34,7 +34,7 @@ function NotDoneList() {
       {
         itemsNotDone.length && !loading
           ?
-          itemsNotDone.sort((a, b) => b.date - a.date).reverse().map((item) => (
+          itemsNotDone.map((item) => (
             <div key={item.id}>
               <List
                 id={item.id}

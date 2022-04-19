@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import List from '../../components/List'
+import List from '../../components/list'
 import { GET_DONE_TODO } from '../../constants/reducerCase';
 import LoadingIcon from '../../utils/LoadingIcon'
 
@@ -34,7 +34,7 @@ function DoneList() {
       {
         itemsDone && !loading
           ?
-          itemsDone.sort((a, b) => b.date - a.date).reverse().map((item) => (
+          itemsDone.map((item) => (
             <div key={item.id}>
               <List
                 id={item.id}

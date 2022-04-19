@@ -29,7 +29,6 @@ function FormTodo({ handleChange, handleSubmit, inputs, bottomButton }) {
           </div>
         </div>
       </div>
-
       <div className="mt-8">
         <button
           type="submit"

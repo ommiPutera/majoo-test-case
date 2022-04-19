@@ -3,7 +3,7 @@ import { format } from 'date-fns'
 import React, { Fragment } from 'react'
 import { useDispatch } from 'react-redux';
 import Popup from '../../components/popup';
-import FormTodo from '../../components/FormTodo';
+import FormTodo from '../../components/list/FormTodo';
 import { CHANGE_TAB, CREATE_TODO } from '../../constants/reducerCase';
 
 function CreateTodo() {
@@ -37,7 +37,7 @@ function CreateTodo() {
       title: inputs.title,
       description: inputs.desc,
       status: 0,
-      createdAt: format(date, 'dd MMM HH:mm:ss')
+      createdAt: format(date, 'yyyy-MM-dd HH:mm')
     }
 
     dispatch({ type: CREATE_TODO, data })

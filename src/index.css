@@ -5,3 +5,22 @@
 body {
   @apply bg-gray-200/50;
 }
+
+.animate__component {
+  animation: comp_ 0.2s ease-in-out;
+  @apply transition-all;
+}
+
+@keyframes comp_ {
+  100% {
+    transform: translate(0, 0);
+    @apply opacity-100;
+  }
+  50% {
+    @apply opacity-60;
+  }
+  0% {
+    transform: translate(0, 50%);
+    @apply opacity-30;
+  }
+}

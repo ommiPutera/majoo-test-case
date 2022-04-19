@@ -1,13 +1,14 @@
 import {
   CHANGE_TAB, CHECKED_TODO, CREATE_TODO,
   GET_DONE_TODO, GET_NOT_DONE_TODO, REMOVE_TODO,
-  UPDATE_TODO
+  UPDATE_TODO, COMPLETE_INFO_TODO
 } from "../../constants/reducerCase";
 
 const defaultState = {
   itemsNotDone: [],
   itemsDone: [],
   tab: 'not-done-list',
+  completeInfo: false,
 };
 
 const reducer = (state = defaultState, action) => {
@@ -25,7 +26,7 @@ const reducer = (state = defaultState, action) => {
     case CREATE_TODO:
       return {
         ...state,
-        itemsNotDone: [...state.itemsNotDone, action.data],
+        itemsNotDone: [...state.itemsNotDone, action.data]
       };
     case REMOVE_TODO:
       return {
@@ -41,11 +42,19 @@ const reducer = (state = defaultState, action) => {
     case CHECKED_TODO:
       return {
         ...state,
-        itemsDone: [...state.itemsDone, action.dataItemsDone]
+        itemsDone: [...state.itemsDone, action.dataItemsDone],
+        completeInfo: true
+      };
+    case COMPLETE_INFO_TODO:
+      return {
+        ...state,
+        completeInfo: false
       };
     case CHANGE_TAB:
       return {
         ...state,
+        itemsNotDone: state.itemsNotDone.reverse(),
+        itemsDone: state.itemsDone.reverse(),
         tab: action.tabName,
       };
     default:
