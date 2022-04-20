@@ -1,6 +1,6 @@
 import React from 'react'
 
-function FormTodo({ handleChange, handleSubmit, inputs, bottomButton }) {
+function FormTodo({ handleChange, handleSubmit, inputs, bottomButton, rightButton }) {
   return (
     <form className="mt-8">
       <div className='space-y-4'>
@@ -29,7 +29,7 @@ function FormTodo({ handleChange, handleSubmit, inputs, bottomButton }) {
           </div>
         </div>
       </div>
-      <div className="mt-8">
+      <div className="mt-8 flex gap-2">
         <button
           type="submit"
           className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
@@ -37,6 +37,7 @@ function FormTodo({ handleChange, handleSubmit, inputs, bottomButton }) {
         >
           {bottomButton}
         </button>
+        {rightButton}
       </div>
     </form>
   )

@@ -1,9 +1,9 @@
-import axios from 'axios'
-import React from 'react'
+import axios from 'axios';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import List from '../../components/list'
-import { GET_NOT_DONE_TODO } from '../../constants/reducerCase';
-import LoadingIcon from '../../utils/LoadingIcon'
+import List from '../../components/list';
+import { GET_DONE_TODO, GET_NOT_DONE_TODO } from '../../constants/reducerCase';
+import LoadingIcon from '../../utils/LoadingIcon';
 
 function NotDoneList() {
   const dispatch = useDispatch();
@@ -15,7 +15,10 @@ function NotDoneList() {
       .get('https://virtserver.swaggerhub.com/hanabyan/todo/1.0.0/to-do-list')
       .then((items) => {
         const data = items.data.filter((item) => item?.status === 0)
+        const dataNotDone = items.data.filter((item) => item?.status === 1)
+
         dispatch({ type: GET_NOT_DONE_TODO, data })
+        dispatch({ type: GET_DONE_TODO, data: dataNotDone })
         setLoading(false)
       })
   }, [dispatch])

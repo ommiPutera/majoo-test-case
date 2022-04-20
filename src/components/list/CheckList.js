@@ -20,9 +20,9 @@ function CheckList({ status, id, itemsNotDone }) {
       {
         status === 0
         &&
-        <button className='pr-4' onClick={onChecked}>
+        <div className='pr-4' onClick={onChecked}>
           <CheckCircleIcon className='h-7 w-7 text-gray-500 hover:opacity-50' />
-        </button>
+        </div>
       }
       {
         status === 1
