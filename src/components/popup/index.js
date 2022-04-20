@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
+import { XIcon } from '@heroicons/react/solid'
 
 function Popup({ Button, buttonText, headText, openModal, closeModal, isOpen, children, }) {
   return (
@@ -56,6 +57,9 @@ function Popup({ Button, buttonText, headText, openModal, closeModal, isOpen, ch
                   className="text-lg font-medium leading-6 text-gray-900"
                 >
                   {headText}
+                  <button onClick={closeModal} className='absolute right-6'>
+                    <XIcon className="h-5 w-5" />
+                  </button>
                 </Dialog.Title>
 
                 {children}

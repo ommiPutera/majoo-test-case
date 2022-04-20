@@ -24,7 +24,7 @@ function List({
     <button
       onClick={() => setIsOpen(!isOpen)}
       className={clsx(
-        "relative w-full flex items-center justify-between my-2.5 px-4 py-[14px] rounded-lg shadow-sm",
+        "relative w-full flex items-center justify-between my-2.5 px-4 py-3 rounded-lg shadow-sm",
         "bg-white hover:bg-blue-50 border border-transparent hover:border-blue-400",
       )}
     >
@@ -46,6 +46,7 @@ function List({
       />
       <div className='text-left flex-1'>
         <h1 className="font-semibold leading-5 text-base">{title}</h1>
+        <h1 className="font-semibold text-gray-500 leading-5 text-xs">{date}</h1>
       </div>
       <div className='flex gap-3'>
         <EditList
